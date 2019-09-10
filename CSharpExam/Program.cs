@@ -1,5 +1,6 @@
 ﻿using System;
-
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace CSharpExam
 {
@@ -13,7 +14,11 @@ namespace CSharpExam
             var CreateAndImplementEventsAndCallbacks = new Chapter1_4_CreateAndImplementEventsAndCallbacks();
             var ImplementExceptionHandling = new Chapter1_5_ImplementExceptionHandling();
 
-
+            ImplementMultithreading.CreateThread();
+            ImplementMultithreading.StoppingAThread(false);
+            ImplementMultithreading.UsingThreadStaticAttribute();
         }
+
+
     }
 }
