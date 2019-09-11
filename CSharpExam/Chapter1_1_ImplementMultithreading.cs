@@ -60,10 +60,147 @@ namespace CSharpExam
 
 
 
-        [ThreadStatic] int _field;
-        public void UsingThreadStaticAttribute()
+      
+        public void UsingThreadLocal()
         {
+            var _field = new ThreadLocal<int>(() =>
+            {
+                return Thread.CurrentThread.ManagedThreadId;
+            });
 
+            new Thread(() =>
+            {
+                for (int x = 0; x < _field.Value; x++)
+                {
+                    Console.WriteLine("Thread A: {0}", x);
+                }
+            }).Start();
+            new Thread(() =>
+            {
+                for (int x = 0; x < _field.Value; x++)
+                {
+                    Console.WriteLine("Thread B: {0}", x);
+                }
+            }).Start();
+
+            Console.ReadKey();
+        }
+
+
+
+        public void ThreadPooling()
+        {
+            ThreadPool.QueueUserWorkItem((s) =>
+            {
+                Console.WriteLine("*Working on a thread from threadpool*");
+            });
+        }
+
+
+
+        public void CreatingATaskAndWaitingForitToFinish()
+        {
+            Task t = Task.Run(() =>
+            {
+                for (int x = 1; x <= 100; x++)
+                {
+                    Console.WriteLine("*");
+                    Thread.Sleep(150);
+                }
+            });
+            t.Wait();
+        }
+
+
+
+        public void AddingAContinuationTask()
+        {
+            Task<int> t = Task.Run(() =>
+            {
+                return 42;
+            }).ContinueWith((i) =>
+            {
+                return i.Result * 2;
+            });
+
+            Console.WriteLine(t.Result); //displays 84
+        }
+
+
+
+        public void MultipleContinuationTasks()
+        {
+            Task<int> t = Task.Run(() =>
+            {
+                return 42;
+            });
+
+            t.ContinueWith((i) =>
+            {
+                Console.WriteLine("Cancelled");
+            }, TaskContinuationOptions.OnlyOnCanceled);
+
+            t.ContinueWith((i) =>
+            {
+                Console.WriteLine("Faulted");
+            }, TaskContinuationOptions.OnlyOnFaulted);
+
+            var completedTask = t.ContinueWith((i) =>
+            {
+                Console.WriteLine("Completed");
+            }, TaskContinuationOptions.OnlyOnRanToCompletion);
+
+            completedTask.Wait();
+        }
+
+
+
+        public void attachingChildTasksToParentTask()
+        {
+            Task<Int32[]> parent = Task.Run(() =>
+            {
+                var results = new Int32[3];
+                new Task(() => results[0] = 0,
+                    TaskCreationOptions.AttachedToParent).Start();
+                new Task(() => results[1] = 1,
+                    TaskCreationOptions.AttachedToParent).Start();
+                new Task(() => results[2] = 2,
+                    TaskCreationOptions.AttachedToParent).Start();
+
+                return results;
+            });
+
+            var finalTask = parent.ContinueWith((parentTask) => 
+            {
+                foreach (int i in parent.Result)
+                    Console.WriteLine(i);
+            });
+            finalTask.Wait();
+        }
+
+
+
+        public void CreatingATaskFactory()
+        {
+            Task<Int32[]> parent = Task.Run(() =>
+            {
+                var results = new Int32[3];
+
+                TaskFactory tf = new TaskFactory(TaskCreationOptions.AttachedToParent, TaskContinuationOptions.ExecuteSynchronously);
+
+                tf.StartNew(() => results[0] = 0);
+                tf.StartNew(() => results[1] = 1);
+                tf.StartNew(() => results[2] = 2);
+                return results;
+            });
+
+            var finalTask = parent.ContinueWith((parentTask) =>
+            {
+                foreach (int i in parentTask.Result)
+                    Console.WriteLine(i);
+            });
+
+            finalTask.Wait();
         }
     }
 }

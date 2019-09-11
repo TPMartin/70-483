@@ -14,9 +14,27 @@ namespace CSharpExam
             var CreateAndImplementEventsAndCallbacks = new Chapter1_4_CreateAndImplementEventsAndCallbacks();
             var ImplementExceptionHandling = new Chapter1_5_ImplementExceptionHandling();
 
-            ImplementMultithreading.CreateThread();
-            ImplementMultithreading.StoppingAThread(false);
-            ImplementMultithreading.UsingThreadStaticAttribute();
+            //Chapter 1
+
+            //1.1 Implement Multithreading
+
+            //ImplementMultithreading.CreateThread();
+
+            //ImplementMultithreading.StoppingAThread(false);
+
+            //ImplementMultithreading.UsingThreadLocal();
+
+            //ImplementMultithreading.ThreadPooling();
+
+            //ImplementMultithreading.CreatingATaskAndWaitingForitToFinish();
+
+            //ImplementMultithreading.AddingAContinuationTask();
+
+            //ImplementMultithreading.MultipleContinuationTasks();
+
+            //ImplementMultithreading.attachingChildTasksToParentTask();
+
+            ImplementMultithreading.CreatingATaskFactory();
         }
 
 
