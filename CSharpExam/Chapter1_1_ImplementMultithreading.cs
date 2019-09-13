@@ -247,5 +247,64 @@ namespace CSharpExam
                 return result;
             }
         }
+
+        public void UsingAsParallel()
+        {
+            var numbers = Enumerable.Range(0, 10);
+            var parallelResult = numbers.AsParallel()
+                .Where(i => i % 2 == 0)
+                .ToArray();
+
+            foreach (int x in parallelResult)          
+                Console.WriteLine(x);            
+        }
+
+        public void UsingAsParallelOrdered()
+        {
+            var numbers = Enumerable.Range(0, 10);
+            var parallelResult = numbers.AsParallel().AsOrdered()
+                .Where(i => i % 2 == 0)
+                .ToArray();
+
+            foreach (int x in parallelResult)
+                Console.WriteLine(x);
+        }
+
+        public void MakingParallelQuerySequential()
+        {
+            var numbers = Enumerable.Range(0, 10);
+            var parallelResult = numbers.AsParallel().AsOrdered()
+                .Where(i => i % 2 == 0).AsSequential();
+
+            foreach (int x in parallelResult.Take(5)) //take specifies how many results to return, starting at the beginning
+                Console.WriteLine(x);
+        }
+
+
+        public void CatchingAggregateException()
+        {
+            var numbers = Enumerable.Range(0, 20);
+
+            try
+            {
+                var parallelResult = numbers.AsParallel()
+                    .Where(i => IsEven(i));
+
+                parallelResult.ForAll(e => Console.WriteLine(e));
+            }
+            catch (AggregateException e)
+            {
+                Console.WriteLine("There were {0} exceptions", e.InnerExceptions.Count);
+            }
+        }
+
+        public bool IsEven(int i)
+        {
+            if (i % 10 == 0) throw new ArgumentException("i");
+
+            return i % 2 == 0;
+        }
+
+
     }
 }

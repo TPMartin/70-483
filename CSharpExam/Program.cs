@@ -40,7 +40,13 @@ namespace CSharpExam
 
             //ImplementMultithreading.BreakingParallelLoopUsingParallelLoopState();
 
-            ImplementMultithreading.UsingAsycAndAwait();
+            //ImplementMultithreading.UsingAsycAndAwait();
+
+            //ImplementMultithreading.UsingAsParallel();
+
+            //ImplementMultithreading.UsingAsParallelOrdered();
+
+            ImplementMultithreading.CatchingAggregateException();
         }
 
 
