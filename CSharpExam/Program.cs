@@ -34,7 +34,13 @@ namespace CSharpExam
 
             //ImplementMultithreading.attachingChildTasksToParentTask();
 
-            ImplementMultithreading.CreatingATaskFactory();
+            //ImplementMultithreading.CreatingATaskFactory();
+
+            //ImplementMultithreading.ParallelForAndForeachLoop();
+
+            //ImplementMultithreading.BreakingParallelLoopUsingParallelLoopState();
+
+            ImplementMultithreading.UsingAsycAndAwait();
         }
 
 
