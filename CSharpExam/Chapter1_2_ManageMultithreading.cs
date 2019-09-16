@@ -120,7 +120,7 @@ namespace CSharpExam
                 while (!token.IsCancellationRequested)
                 {
                     Console.WriteLine("*");
-                    Thread.Sleep(1000);
+                    Thread.Sleep(500);
                 }
 
             }, token);
@@ -132,6 +132,88 @@ namespace CSharpExam
             Console.WriteLine("Press enter to end the application");
             Console.ReadLine();
         }
+
+        public void ThrowingOperationCancelledException()
+        {
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+            CancellationToken token = cancellationTokenSource.Token;
+
+            Task task = Task.Run(() =>
+            {
+                while (!token.IsCancellationRequested)
+                {
+                    Console.WriteLine("*");
+                    Thread.Sleep(500);
+                }
+
+                token.ThrowIfCancellationRequested();
+
+            }, token);
+
+            try
+            {
+                Console.WriteLine("Press enter to stop the task");
+                Console.ReadLine();
+                cancellationTokenSource.Cancel();
+                task.Wait();
+            }
+            catch (AggregateException e)
+            {
+                Console.WriteLine(e.InnerExceptions[0].Message);
+            }
+            Console.WriteLine("Press enter to end the application");
+            Console.ReadLine();
+        }
+
+
+        public void AddingContinuationForCancelledTsks()
+        {
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+            CancellationToken token = cancellationTokenSource.Token;
+
+            Console.WriteLine("Press enter to stop the task");
+
+            Task task = Task.Run(() =>
+            {
+                while (!token.IsCancellationRequested)
+                {
+                    Console.WriteLine("*");
+                    Thread.Sleep(500);
+                }
+                token.ThrowIfCancellationRequested();
+            }, token).ContinueWith((t) =>
+            {
+                Console.WriteLine("You have cancelled the task.");
+            }, TaskContinuationOptions.OnlyOnCanceled);
+
+            Console.ReadLine();
+            cancellationTokenSource.Cancel();
+            task.Wait();
+        }
+
+        public void SettingaTimeoutOnATsk()
+        {
+            Console.WriteLine("This task will timeout in 10 seconds.");
+            int x = 0;
+            Task longRunning = Task.Run(() =>
+            {
+                while (x == 0)
+                {
+                    Console.WriteLine("*");
+                    Thread.Sleep(500);
+                }
+            });
+
+            int index = Task.WaitAny(new[] { longRunning }, 10000);
+
+            if (index == -1)
+            {
+                Console.WriteLine("Task timed out.");
+            }
+        }
+
+
+
     }
 }
 

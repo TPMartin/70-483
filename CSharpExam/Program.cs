@@ -72,7 +72,13 @@ namespace CSharpExam
 
             //ManageMultithreading.IncrementDecrement();
 
-            ManageMultithreading.CancellingATask();
+            //ManageMultithreading.CancellingATask();
+
+            //ManageMultithreading.ThrowingOperationCancelledException();
+
+            //ManageMultithreading.AddingContinuationForCancelledTsks();
+
+            ManageMultithreading.SettingaTimeoutOnATsk();
         }
     }
 }
