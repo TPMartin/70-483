@@ -46,9 +46,31 @@ namespace CSharpExam
 
             //ImplementMultithreading.UsingAsParallelOrdered();
 
-            ImplementMultithreading.CatchingAggregateException();
+            //ImplementMultithreading.CatchingAggregateException();
+
+            //ImplementMultithreading.usingBlockingCollection();
+
+            //ImplementMultithreading.enumeratingAConcurrentBag();
+
+            //ImplementMultithreading.usingAConcurrentStack();
+
+            //ImplementMultithreading.usingConcurrentQueue();
+
+            //ImplementMultithreading.usingConcurrentDictionary();
+
+
+
+            //------------------------------------------
+
+
+
+            //ManageMultithreading.AccessingSharedData();
+
+            //ManageMultithreading.UsingLockKeyword();
+
+            //ManageMultithreading.CreatingADeadlock();
+
+            ManageMultithreading.IncrementDecrement();
         }
-
-
     }
 }

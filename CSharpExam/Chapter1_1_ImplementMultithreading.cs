@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Net.Http;
+using System.Collections.Concurrent;
 
 namespace CSharpExam
 {
@@ -62,7 +63,7 @@ namespace CSharpExam
 
 
 
-      
+
         public void UsingThreadLocal()
         {
             var _field = new ThreadLocal<int>(() =>
@@ -172,7 +173,7 @@ namespace CSharpExam
                 return results;
             });
 
-            var finalTask = parent.ContinueWith((parentTask) => 
+            var finalTask = parent.ContinueWith((parentTask) =>
             {
                 foreach (int i in parent.Result)
                     Console.WriteLine(i);
@@ -255,8 +256,8 @@ namespace CSharpExam
                 .Where(i => i % 2 == 0)
                 .ToArray();
 
-            foreach (int x in parallelResult)          
-                Console.WriteLine(x);            
+            foreach (int x in parallelResult)
+                Console.WriteLine(x);
         }
 
         public void UsingAsParallelOrdered()
@@ -298,13 +299,136 @@ namespace CSharpExam
             }
         }
 
-        public bool IsEven(int i)
+        private bool IsEven(int i)
         {
-            if (i % 10 == 0) throw new ArgumentException("i");
-
+            if (i % 10 == 0)
+            {
+                throw new ArgumentException("i");
+            }
             return i % 2 == 0;
         }
 
+        public void usingBlockingCollection()
+        {
+            BlockingCollection<string> col = new BlockingCollection<string>();
+            Task read = Task.Run(() =>
+            {
+                while (true)
+                {
+                    Console.WriteLine(col.Take());
+                }
+            });
 
+            Task write = Task.Run(() =>
+            {
+                while (true)
+                {
+                    string s = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(s)) break;
+                    col.Add(s);
+                }
+            });
+
+            write.Wait();
+        }
+
+
+        public void usingConcurrentBag()
+        {
+            ConcurrentBag<int> bag = new ConcurrentBag<int>();
+            bag.Add(42);
+            bag.Add(21);
+
+            int result;
+            if (bag.TryTake(out result))
+            {
+                Console.WriteLine(result);
+            }
+            if (bag.TryPeek(out result))
+            {
+                Console.WriteLine("There is a next item: {0}", result);
+            }
+
+        }
+
+
+        public void enumeratingAConcurrentBag()
+        {
+            ConcurrentBag<int> bag = new ConcurrentBag<int>();
+            Task.Run(() =>
+            {
+                bag.Add(42);
+                Thread.Sleep(1000);
+                bag.Add(21);
+            });
+            Task.Run(() =>
+            {
+                foreach (int i in bag)
+                {
+                    Console.WriteLine(i);
+                }
+            }).Wait();
+
+        }
+
+        public void usingAConcurrentStack()
+        {
+            ConcurrentStack<int> stack = new ConcurrentStack<int>();
+
+            stack.Push(42);
+
+            int result;
+            if (stack.TryPop(out result))
+            {
+                Console.WriteLine("Popped: {0}", result); //output 42
+            }
+
+            stack.PushRange(new int[] { 1, 2, 3 });
+
+            int[] values = new int[2];
+            stack.TryPopRange(values);
+
+            foreach (int i in values)
+            {
+                Console.WriteLine(i);
+            }
+        }
+
+        public void usingConcurrentQueue()
+        {
+            ConcurrentQueue<int> queue = new ConcurrentQueue<int>();
+            queue.Enqueue(42);
+
+            int result;
+            if (queue.TryDequeue(out result))
+            {
+                Console.WriteLine("Dequeued: {0}", result);
+            }
+
+            //dequeued 42
+        }
+
+
+        public void usingConcurrentDictionary()
+        {
+            var dict = new ConcurrentDictionary<string, int>();
+            if (dict.TryAdd("k1", 42))
+            {
+                Console.WriteLine("Added");
+            }
+
+            if (dict.TryUpdate("k2", 21, 42))
+            {
+                Console.WriteLine("42 updated to 21");
+            }
+
+            dict["k1"] = 42; //overwrite unconditionally
+
+            int r1 = dict.AddOrUpdate("k1", 3, (s, i) => i * 2);
+            int r2 = dict.GetOrAdd("k2", 3);
+
+            Console.WriteLine(r1);
+            Console.WriteLine(r2);
+        }
     }
 }
