@@ -70,7 +70,9 @@ namespace CSharpExam
 
             //ManageMultithreading.CreatingADeadlock();
 
-            ManageMultithreading.IncrementDecrement();
+            //ManageMultithreading.IncrementDecrement();
+
+            ManageMultithreading.CancellingATask();
         }
     }
 }
