@@ -93,5 +93,63 @@ namespace CSharpExam
             }
         }
 
+        public void ForLoop()
+        {
+            int[] values = { 1, 2, 3, 4, 5 };
+
+            for (int i = 0; i < values.Length; i++)
+            {
+                Console.WriteLine(values[i]);
+            }
+        }
+
+        public void WhileDoLoop()
+        {
+            int[] values = { 1, 2, 3, 4, 5 };
+            int x = 0;
+            while (x < values.Length) 
+            {
+                Console.WriteLine(values[x]);
+                x++;
+            }
+        }
+
+
+        public void DoWhileLoop()
+        {
+            int[] values = { 1, 2, 3, 4, 5 };
+            int x = 0;
+            do //do while loops execute at least once
+            {
+                Console.WriteLine(values[x]);
+                x++;
+            }
+            while (x < values.Length);
+
+        }
+
+        public void ForeachLoop()
+        {
+            int[] values = { 1, 2, 3, 4, 5 };
+
+            foreach (int i in values)
+            {
+                Console.WriteLine(i);
+            }
+        }
+
+
+        public void JumpStatement()
+        {
+            int x = 3;
+            if (x == 3) goto customLabel;
+
+            x = 5;
+
+        customLabel:
+            Console.WriteLine(x);
+            //will output 3
+        }
+
     }
 }
