@@ -131,6 +131,7 @@ namespace CSharpExam
 
             Console.WriteLine("Press enter to end the application");
             Console.ReadLine();
+            cancellationTokenSource.Dispose();
         }
 
         public void ThrowingOperationCancelledException()
@@ -163,6 +164,7 @@ namespace CSharpExam
             }
             Console.WriteLine("Press enter to end the application");
             Console.ReadLine();
+            cancellationTokenSource.Dispose();
         }
 
 
@@ -189,6 +191,7 @@ namespace CSharpExam
             Console.ReadLine();
             cancellationTokenSource.Cancel();
             task.Wait();
+            cancellationTokenSource.Dispose();
         }
 
         public void SettingaTimeoutOnATsk()
