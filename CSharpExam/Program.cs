@@ -85,10 +85,18 @@ namespace CSharpExam
             //------------------------------------------
 
 
+            
+            ImplementProgramFlow.StandardIfStatement();
 
-            //ImplementProgramFlow.StandardIfStatement();
+            ImplementProgramFlow.NullCoalaescingOperator();
 
-            //ImplementProgramFlow.NullCoalaescingOperator();
+            ImplementProgramFlow.ConditionalOperator(true);
+
+            ImplementProgramFlow.SwitchStatement();
+
+            ImplementProgramFlow.GoToSwitchStatement();
+
+            
 
             
         }
