@@ -13,6 +13,7 @@ namespace CSharpExam
             Chapter1_3_ImplementProgramFlow ImplementProgramFlow = new Chapter1_3_ImplementProgramFlow();
             Chapter1_4_CreateAndImplementEventsAndCallbacks EventsAndCallbacks = new Chapter1_4_CreateAndImplementEventsAndCallbacks();
             Chapter1_5_ImplementExceptionHandling ImplementExceptionHandling = new Chapter1_5_ImplementExceptionHandling();
+            //Chapter2_1_CreateTypes. = new Chapter2_1_CreateTypes();
 
             //Chapter 1
 
@@ -114,7 +115,7 @@ namespace CSharpExam
 
             //EventsAndCallbacks.UsingADelegate();
 
-            EventsAndCallbacks.MulticastingDelegates();
+            //EventsAndCallbacks.MulticastingDelegates();
 
         }
     }

@@ -48,6 +48,16 @@ namespace CSharpExam
             Console.WriteLine("MethodTwo");
         }
 
+        public void LambdaExpression()
+        {
+            Calculate calc = (x, y) => x + y;
 
+            //lambda "=>" means "goes to"
+
+            Console.WriteLine(calc(3, 4));
+
+            calc = (x, y) => x * y;
+            Console.WriteLine(calc(3, 4));
+        }
     }
 }
