@@ -15,6 +15,8 @@ namespace CSharpExam
         public int Add(int x, int y) { return x + y; }
         public int Multiply(int x, int y) { return x * y; }
 
+        public delegate void Del();
+
         public void UsingADelegate()
         {
 
@@ -27,7 +29,25 @@ namespace CSharpExam
 
         public void MulticastingDelegates()
         {
+            Del d = MethodOne;
+            d += MethodTwo;
 
+            d();
+
+            int invocationCount = d.GetInvocationList().GetLength(0);
+            Console.WriteLine("Methods invoked by delegate: {0}", invocationCount);
         }
+
+        public void MethodOne()
+        {
+            Console.WriteLine("MethodOne");
+        }
+
+        public void MethodTwo()
+        {
+            Console.WriteLine("MethodTwo");
+        }
+
+
     }
 }
