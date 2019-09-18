@@ -11,7 +11,6 @@ namespace CSharpExam
 {
     class Chapter1_1_ImplementMultithreading
     {
-
         //Creating a thread
         public void CreateThread()
         {

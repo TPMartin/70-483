@@ -11,7 +11,7 @@ namespace CSharpExam
             Chapter1_1_ImplementMultithreading ImplementMultithreading = new Chapter1_1_ImplementMultithreading();
             Chapter1_2_ManageMultithreading ManageMultithreading = new Chapter1_2_ManageMultithreading();
             Chapter1_3_ImplementProgramFlow ImplementProgramFlow = new Chapter1_3_ImplementProgramFlow();
-            Chapter1_4_CreateAndImplementEventsAndCallbacks CreateAndImplementEventsAndCallbacks = new Chapter1_4_CreateAndImplementEventsAndCallbacks();
+            Chapter1_4_CreateAndImplementEventsAndCallbacks EventsAndCallbacks = new Chapter1_4_CreateAndImplementEventsAndCallbacks();
             Chapter1_5_ImplementExceptionHandling ImplementExceptionHandling = new Chapter1_5_ImplementExceptionHandling();
 
             //Chapter 1
@@ -102,9 +102,20 @@ namespace CSharpExam
 
             //ImplementProgramFlow.DoWhileLoop();
 
-            ImplementProgramFlow.ForeachLoop();
+            //ImplementProgramFlow.ForeachLoop();
 
-            
+            //ImplementProgramFlow.JumpStatement();
+
+
+
+            //------------------------------------------
+
+
+
+            //EventsAndCallbacks.UsingADelegate();
+
+            EventsAndCallbacks.MulticastingDelegates();
+
         }
     }
 }
