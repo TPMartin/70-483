@@ -54,10 +54,36 @@ namespace CSharpExam
 
             //lambda "=>" means "goes to"
 
-            Console.WriteLine(calc(3, 4));
+            Console.WriteLine(calc(3, 4)); //displays 7
 
             calc = (x, y) => x * y;
-            Console.WriteLine(calc(3, 4));
+            Console.WriteLine(calc(3, 4)); //displays 12
         }
+
+        public void UsingActionDelegate()
+        {
+            Action<int, int> calc = (x, y) =>
+            {
+                Console.WriteLine(x + y);
+            };
+
+            calc(3, 4); //Displays 7
+        }
+
+        public Action OnChange { get; set; }
+
+        public void Raise()
+        {
+            if (OnChange != null)
+            {
+                OnChange();
+            }
+        }
+
+        public void UsingActionToExposeEvent()
+        {
+            
+
+    }
     }
 }

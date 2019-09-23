@@ -117,6 +117,10 @@ namespace CSharpExam
 
             //EventsAndCallbacks.MulticastingDelegates();
 
+            EventsAndCallbacks.LambdaExpression();
+
+
+
         }
     }
 }
