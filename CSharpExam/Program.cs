@@ -117,10 +117,28 @@ namespace CSharpExam
 
             //EventsAndCallbacks.MulticastingDelegates();
 
-            EventsAndCallbacks.LambdaExpression();
+            //EventsAndCallbacks.LambdaExpression();
 
 
 
+
+            //------------------------------------------
+
+
+
+
+            //ImplementExceptionHandling.CatchingAFormatException();
+
+            //ImplementExceptionHandling.CatchingDifferentExceptionTypes();
+
+            ImplementExceptionHandling.UsingFinallyBlock();
+
+            ImplementExceptionHandling.UsingEnvironmentFailFast();
+
+            ImplementExceptionHandling.InspectingAnException();
+
+            ImplementExceptionHandling.ThrowingAnArgumentNullException();
+            
         }
     }
 }
